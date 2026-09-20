@@ -1,0 +1,13 @@
+{
+  "name": "smarter-bug-fixing-experiments",
+  "private": true,
+  "scripts": {
+    "eval": "promptfoo eval -c evals/promptfooconfig.yaml --no-cache -j 1",
+    "validate": "promptfoo validate config -c evals/promptfooconfig.yaml"
+  },
+  "devDependencies": {
+    "@opencode-ai/sdk": "1.18.31",
+    "opencode-ai": "1.18.31",
+    "promptfoo": "0.123.1"
+  }
+}

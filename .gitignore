@@ -1,0 +1,7 @@
+node_modules/
+evals/.work/*
+!evals/.work/absolute-value/
+evals/.work/absolute-value/*
+!evals/.work/absolute-value/.gitkeep
+promptfoo-results/
+__pycache__/

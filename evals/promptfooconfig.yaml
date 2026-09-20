@@ -1,0 +1,70 @@
+description: Minimal bug-fix skill evaluation
+
+extensions:
+  - file://./lifecycle.cjs:resetFixture
+
+prompts:
+  - '{{request}}'
+
+x-result-schema: &resultSchema
+  type: json_schema
+  schema:
+    type: object
+    additionalProperties: false
+    required: [summary, changed_files, verification]
+    properties:
+      summary:
+        type: string
+      changed_files:
+        type: array
+        items:
+          type: string
+      verification:
+        type: string
+        enum: [passed, failed, not-run]
+
+providers:
+  - id: opencode:sdk
+    label: opencode-go-glm-5.3-flash
+    config:
+      provider_id: opencode-go
+      model: glm-5.3-flash
+      apiKey: '{{env.OPENCODE_GO_API_KEY}}'
+      working_dir: ./.work/absolute-value
+      tools:
+        read: true
+        grep: true
+        glob: true
+        list: true
+        edit: true
+        write: true
+        bash: true
+        skill: true
+      permission:
+        edit: allow
+        bash: allow
+        skill: allow
+        external_directory: deny
+        doom_loop: deny
+        webfetch: deny
+        websearch: deny
+      format: *resultSchema
+
+evaluateOptions:
+  maxConcurrency: 1
+  cache: false
+
+tests:
+  - description: Automatically loads the minimal-fix skill for a focused review finding
+    vars:
+      request: |
+        Fix this bug.
+
+        Review:
+        distance_from_origin returns a negative number for negative coordinates. It should return the non-negative distance from zero.
+    assert:
+      - type: skill-used
+        value: minimal-bug-fix
+      - type: is-json
+      - type: javascript
+        value: file://./verify-absolute-value.cjs
