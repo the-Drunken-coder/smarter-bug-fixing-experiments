@@ -8,7 +8,7 @@ The current [SWE-bench task format](https://www.swebench.com/SWE-bench/reference
 
 [SWE-Lancer](https://openai.com/index/swe-lancer/) extends the scale and realism to more than 1,400 freelance engineering tasks. Its independent tasks use end-to-end tests that were triple-verified by engineers, and its public release includes a unified Docker image. This reinforces the decision to treat executable correctness as the gate, while leaving MinimalFix's distinct question, patch restraint, visible rather than hidden behind an aggregate score.
 
-[OpenHands Benchmarks](https://github.com/OpenHands/benchmarks) is useful integration precedent: it accepts an LLM configuration carrying a model, base URL, and API key, and logs per-instance runs. It is oriented to long-horizon agents and tool trajectories. MinimalFix intentionally starts with a diff-only adapter so a prompt strategy can be evaluated without agent navigation, tool use, or repository state becoming confounders.
+[OpenHands Benchmarks](https://github.com/OpenHands/benchmarks) is useful integration precedent: it accepts an LLM configuration carrying a model, base URL, and API key, and logs per-instance runs. It is oriented to long-horizon agents and tool trajectories. MinimalFix uses Promptfoo's OpenCode SDK with read, navigation, edit, write, bash, and skill tools in a mutable fixture workspace. The lifecycle recreates that workspace before and after each test for isolation while preserving tool use and repository-state effects during the run.
 
 ## Why verifier quality matters
 

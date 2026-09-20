@@ -23,7 +23,7 @@ Promptfoo asserts that OpenCode invoked `minimal-bug-fix`, then grades the actua
 
 ## Run the experiment
 
-Install the JavaScript dependencies once, then expose your OpenCode Go key only to the process running the eval:
+Install the JavaScript dependencies, including the project-local OpenCode CLI, then expose your OpenCode Go key only to the process running the eval:
 
 ```bash
 npm install
